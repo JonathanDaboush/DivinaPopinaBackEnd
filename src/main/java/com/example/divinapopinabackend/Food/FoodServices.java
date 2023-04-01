@@ -11,11 +11,13 @@ public class FoodServices {
     FoodRepository foodRepository;
 
     public Food getFoodById(long id){
-        return foodRepository.getReferenceById(id);
+        Food food=foodRepository.getReferenceById(id);
+        return food;
     }
 
     public Food getFoodByName(String name){
-        return foodRepository.findByFoodName(name).get(0);
+        List<Food> food=foodRepository.findByFoodName(name);
+        return food.get(0);
     }
     public void saveFood(Food food){
         foodRepository.save(food);

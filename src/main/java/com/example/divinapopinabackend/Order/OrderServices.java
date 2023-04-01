@@ -1,11 +1,9 @@
 package com.example.divinapopinabackend.Order;
 
-import com.example.divinapopinabackend.Order.Order;
-import com.example.divinapopinabackend.Order.OrderRepository;
+import com.example.divinapopinabackend.Reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.util.List;
 
 @Component

@@ -8,9 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository  extends JpaRepository<Transaction, Long> {
-    @Query(value =  " SELECT *  "
-            +  " FROM transaction  "
-            +  " WHERE credit_card_number = :key "
-            , nativeQuery = true)
-    List<Transaction> findTransactionByName(String key);
+
 }

@@ -1,7 +1,5 @@
 package com.example.divinapopinabackend.Reservation;
 
-import com.example.divinapopinabackend.Reservation.Reservation;
-import com.example.divinapopinabackend.Reservation.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +14,15 @@ public class ReservationServices {
     public Reservation getreservationById(long id){
         return reservationRepository.getReferenceById(id);
     }
-
-    public Reservation getReservationByName(String name){
-        return reservationRepository.findReservationByName(name).get(0);
+    public List<String> getReservationNames(){
+        return reservationRepository.findReservationNames();
     }
-    public Reservation getReservationByDate(Date date){
-        return reservationRepository.findReservationByDate(date).get(0);
+
+    public List<Reservation> getReservationByDate(Date date){
+        return reservationRepository.findReservationByDate(date);
+    }
+    public List<Reservation> getReservationByName(String name){
+        return reservationRepository.findReservationByName(name);
     }
     public void saveReservation(Reservation reservation){
         reservationRepository.save(reservation);

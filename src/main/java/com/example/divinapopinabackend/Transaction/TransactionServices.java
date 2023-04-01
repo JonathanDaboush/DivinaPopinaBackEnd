@@ -16,9 +16,7 @@ public class TransactionServices {
         return transactionRepository.getReferenceById(id);
     }
 
-    public Transaction gettransactionByNumber(String name){
-        return transactionRepository.findTransactionByName(name).get(0);
-    }
+
     public void savetransaction(Transaction transaction){
         transactionRepository.save(transaction);
     }

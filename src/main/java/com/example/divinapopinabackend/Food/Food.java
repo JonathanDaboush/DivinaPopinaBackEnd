@@ -1,5 +1,6 @@
 package com.example.divinapopinabackend.Food;
 
+import com.example.divinapopinabackend.Category.FoodCategory;
 import com.example.divinapopinabackend.Order.Order;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -10,6 +11,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "food")
+@Table(name = "food", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Food implements Serializable {
 
@@ -32,31 +34,17 @@ public class Food implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column
     private String description;
     @Column(nullable = false)
-    private String url;
-    @Column(nullable = false)
-    private float price;
+    private double price;
+    @Column(name="food_category",nullable = false)
+    private String  foodCategory;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "food_entree",
-            joinColumns = @JoinColumn(
-                    name = "ofTarget_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "Side_id", referencedColumnName = "id"))
-
-    private Collection<Food> food;
-
-
-    @OneToMany(mappedBy="food", cascade = CascadeType.ALL)
-    private Set<Order> orders;
-
-    public Food(String name, String description, String url, float price) {
+    public Food(String name, String description, double price,String foodCategory) {
         this.name = name;
         this.description = description;
-        this.url = url;
         this.price = price;
+        this.foodCategory=foodCategory;
     }
 }

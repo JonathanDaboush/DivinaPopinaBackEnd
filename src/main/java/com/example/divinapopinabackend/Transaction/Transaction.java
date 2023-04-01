@@ -21,12 +21,14 @@ public class Transaction {
     @Column(name = "credit_card_number",nullable = false)
     private String creditCardNumber;
     @Column(nullable = false)
-    private float amount;
+    private double amount;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id", referencedColumnName = "id")
     private Reservation reservation;
 
-    public Transaction(String creditCardNumber, float amount, Reservation reservation) {
+
+    public Transaction(String creditCardNumber, double amount, Reservation reservation) {
+
         this.creditCardNumber = creditCardNumber;
         this.amount = amount;
         this.reservation = reservation;
