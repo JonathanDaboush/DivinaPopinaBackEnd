@@ -21,6 +21,9 @@ import java.util.Set;
 @Entity
 @Table(name = "food_category")
 public class FoodCategory {
+    /**
+     * food category is the table holding food categories like dinner ,dessert etc.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)

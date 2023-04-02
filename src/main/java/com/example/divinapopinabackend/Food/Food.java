@@ -26,7 +26,9 @@ import java.util.Set;
 @Table(name = "food", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Food implements Serializable {
-
+    /**
+     * food is the table holding food Item info.
+     */
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

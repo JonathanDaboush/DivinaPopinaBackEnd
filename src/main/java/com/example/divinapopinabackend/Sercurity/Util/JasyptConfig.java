@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JasyptConfig {
 
+    //for encrypting/decrypting sensitive information.
+
     //common method
     //used in classes - JasyptConfig.java and EncryptDecryptPwd.java
     public static SimpleStringPBEConfig getSimpleStringPBEConfig() {

@@ -22,6 +22,9 @@ import java.util.Set;
 @Table(name = "reservation")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Reservation {
+    /**
+     * Transactions is the table holding reservation info.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)

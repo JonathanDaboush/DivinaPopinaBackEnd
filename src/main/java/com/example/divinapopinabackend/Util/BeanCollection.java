@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Getter
 @Service
 public class BeanCollection {
+    // Simple page to hold services for autowired.
     @Bean
     public AuthentificationServices authentificationServices() {
         return new AuthentificationServices();

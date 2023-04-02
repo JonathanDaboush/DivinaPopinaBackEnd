@@ -18,6 +18,9 @@ import lombok.*;
 @Table(name = "orders")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Order {
+    /**
+     * Transactions is the table holding ordering info.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)

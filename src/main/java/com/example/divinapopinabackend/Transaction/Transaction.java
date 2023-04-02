@@ -14,6 +14,9 @@ import lombok.*;
 @Table(name = "transaction")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Transaction {
+    /**
+     * Transactions is the table holding purchasing info.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
