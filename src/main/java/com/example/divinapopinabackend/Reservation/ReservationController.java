@@ -80,6 +80,8 @@ String date=(String)payLoad.get("dateOfEvent");
                 (String)payLoad.get("note"),
                 ofDate,
                 (String)payLoad.get("name"));
+        Transaction transaction=new Transaction("",0,reservation);
+        reservation.setTransaction(transaction);
         reservationServices.saveReservation(reservation);
 
         return ResponseEntity.ok().build();
@@ -110,12 +112,10 @@ String date=(String)payLoad.get("dateOfEvent");
             total=total+(total*tax);
             total=(total * 100) / 100.0;
 
-        Transaction transaction=new Transaction(creditCardNumber,total,reservation);
-        try{
-        transactionServices.removetransaction(reservation.getTransaction().getId());}
-        catch(Exception e){
+        Transaction transaction=reservation.getTransaction();
+        transaction.setCreditCardNumber(creditCardNumber);
+        transaction.setAmount(total);
 
-        }
 
 
         reservation.setTransaction(transaction);
@@ -153,15 +153,12 @@ String date=(String)payLoad.get("dateOfEvent");
         ArrayList<Order> orders=new ArrayList<>(reservation.getOrders());
 
 
-        Transaction transaction=new Transaction(creditCardNumber,amount,reservation);
-        try{
-            transactionServices.removetransaction(reservation.getTransaction().getId());}
-        catch(Exception e){
-
-        }
+       reservation.getTransaction().setCreditCardNumber(creditCardNumber);
+        reservation.getTransaction().setAmount(amount);
 
 
-        reservation.setTransaction(transaction);
+
+
 
         reservationServices.saveReservation(reservation);
         return ResponseEntity.ok().build();
