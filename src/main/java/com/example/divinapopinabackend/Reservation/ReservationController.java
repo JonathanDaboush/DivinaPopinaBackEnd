@@ -92,8 +92,8 @@ String date=(String)payLoad.get("dateOfEvent");
         String creditCardNumber="";
 
         creditCardNumber=(String)payLoad.get("creditCardNumber");
-
-        reservation.setNote((String)payLoad.get("note"));
+        String note=(String)payLoad.get("note");
+        reservation.setNote(note);
 
         DateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date utilDate=simpleDateFormat.parse((String)payLoad.get("dateOfEvent"));
@@ -109,6 +109,7 @@ String date=(String)payLoad.get("dateOfEvent");
 
             total=total+(total*tax);
             total=(total * 100) / 100.0;
+
         Transaction transaction=new Transaction(creditCardNumber,total,reservation);
         try{
         transactionServices.removetransaction(reservation.getTransaction().getId());}
@@ -149,7 +150,6 @@ String date=(String)payLoad.get("dateOfEvent");
 
             amount=((Double)payLoad.get("amount"));
         }
-        reservation.setCost(amount);
         ArrayList<Order> orders=new ArrayList<>(reservation.getOrders());
 
 

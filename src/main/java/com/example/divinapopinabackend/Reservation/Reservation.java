@@ -12,7 +12,6 @@ import java.sql.Date;
 import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIdentityInfo(generator= JSOGGenerator.class)
-
 @Getter
 @Setter
 @Builder
@@ -30,8 +29,7 @@ public class Reservation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private double cost;
+
     @Column
     private String note;
     @Column(name = "date_of_event",nullable = false)
