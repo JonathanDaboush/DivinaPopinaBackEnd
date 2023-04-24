@@ -89,8 +89,9 @@ String date=(String)payLoad.get("dateOfEvent");
         long id=(Integer)payLoad.get("id");
         Reservation reservation=reservationServices.getreservationById(id);
 
-String creditCardNumber="";
-creditCardNumber=(String)payLoad.get("creditCardNumber");
+        String creditCardNumber="";
+
+        creditCardNumber=(String)payLoad.get("creditCardNumber");
 
         reservation.setNote((String)payLoad.get("note"));
 
@@ -114,6 +115,52 @@ creditCardNumber=(String)payLoad.get("creditCardNumber");
         catch(Exception e){
 
         }
+
+
+        reservation.setTransaction(transaction);
+
+        reservationServices.saveReservation(reservation);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/exist/special")
+    public ResponseEntity createreservationExistSpecial(@RequestBody Map<Object, Object> payLoad ) throws URISyntaxException, ParseException {
+        long id=(Integer)payLoad.get("id");
+        Reservation reservation=reservationServices.getreservationById(id);
+
+        String creditCardNumber="";
+
+        creditCardNumber=(String)payLoad.get("creditCardNumber");
+
+        reservation.setNote((String)payLoad.get("note"));
+
+        DateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate=simpleDateFormat.parse((String)payLoad.get("dateOfEvent"));
+        Date ofDate=new java.sql.Date(utilDate.getTime());
+        reservation.setName((String)payLoad.get("name"));
+        reservation.setDateOfEvent(ofDate);
+        double amount=0;
+        if(payLoad.get("amount") instanceof String){
+            amount=(Double.parseDouble((String)payLoad.get("amount")));
+        }
+        else if(payLoad.get("amount") instanceof Integer){
+            amount=(Double.valueOf((Integer)payLoad.get("amount")));
+        }
+        else{
+
+            amount=((Double)payLoad.get("amount"));
+        }
+        reservation.setCost(amount);
+        ArrayList<Order> orders=new ArrayList<>(reservation.getOrders());
+
+
+        Transaction transaction=new Transaction(creditCardNumber,amount,reservation);
+        try{
+            transactionServices.removetransaction(reservation.getTransaction().getId());}
+        catch(Exception e){
+
+        }
+
+
         reservation.setTransaction(transaction);
 
         reservationServices.saveReservation(reservation);
